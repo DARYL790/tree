@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>🎄 圣诞树装饰小游戏</title>
+<style>
+    body {
+        margin: 0;
+        background: linear-gradient(#0a1a2f, #123);
+        font-family: "Microsoft YaHei", sans-serif;
+        color: #fff;
+        text-align: center;
+        user-select: none;
+    }
+
+    h1 {
+        margin: 20px 0 10px;
+    }
+
+    #scene {
+        position: relative;
+        width: 360px;
+        height: 520px;
+        margin: 20px auto;
+        background: radial-gradient(circle at top, #1c3b2f, #0c1f17);
+        border-radius: 16px;
+        box-shadow: 0 0 20px rgba(0,0,0,0.5);
+        overflow: hidden;
+    }
+
+    /* 圣诞树 */
+    .tree {
+        position: absolute;
+        bottom: 60px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 0;
+        height: 0;
+        border-left: 140px solid transparent;
+        border-right: 140px solid transparent;
+        border-bottom: 260px solid #1fa055;
+    }
+
+    .tree::before {
+        content: "";
+        position: absolute;
+        top: 60px;
+        left: -110px;
+        width: 0;
+        height: 0;
+        border-left: 110px solid transparent;
+        border-right: 110px solid transparent;
+        border-bottom: 200px solid #23b463;
+    }
+
+    .tree::after {
+        content: "";
+        position: absolute;
+        top: 120px;
+        left: -80px;
+        width: 0;
+        height: 0;
+        border-left: 80px solid transparent;
+        border-right: 80px solid transparent;
+        border-bottom: 150px solid #2ad173;
+    }
+
+    /* 树干 */
+    .trunk {
+        position: absolute;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 40px;
+        height: 40px;
+        background: #8b5a2b;
+        border-radius: 6px;
+    }
+
+    /* 装饰品区域 */
+    #tools {
+        margin-top: 10px;
+    }
+
+    .ornament {
+        display: inline-block;
+        font-size: 28px;
+        margin: 8px;
+        cursor: grab;
+    }
+
+    .placed {
+        position: absolute;
+        cursor: grab;
+    }
+
+    footer {
+        font-size: 13px;
+        opacity: 0.7;
+        margin-top: 10px;
+    }
+</style>
+</head>
+
+<body>
+
+<h1>🎄 给你的一棵圣诞树</h1>
+<p>把装饰品拖到树上吧 ✨</p>
+
+<div id="scene">
+    <div class="tree"></div>
+    <div class="trunk"></div>
+</div>
+
+<div id="tools">
+    <span class="ornament">⭐</span>
+    <span class="ornament">🎁</span>
+    <span class="ornament">🔔</span>
+    <span class="ornament">🍬</span>
+    <span class="ornament">🎀</span>
+</div>
+
+<footer>
+    圣诞快乐 🎅 | 拖拽装饰属于你的树
+</footer>
+
+<script>
+let dragged = null;
+
+// 从工具栏拖出
+document.querySelectorAll('.ornament').forEach(item => {
+    item.addEventListener('mousedown', e => {
+        dragged = item.cloneNode(true);
+        dragged.classList.add('placed');
+        dragged.style.left = e.pageX - 14 + 'px';
+        dragged.style.top = e.pageY - 14 + 'px';
+        document.body.appendChild(dragged);
+    });
+});
+
+// 拖动
+document.addEventListener('mousemove', e => {
+    if (dragged) {
+        dragged.style.left = e.pageX - 14 + 'px';
+        dragged.style.top = e.pageY - 14 + 'px';
+    }
+});
+
+// 放下
+document.addEventListener('mouseup', () => {
+    if (!dragged) return;
+
+    const scene = document.getElementById('scene');
+    const rect = scene.getBoundingClientRect();
+    const x = parseInt(dragged.style.left);
+    const y = parseInt(dragged.style.top);
+
+    if (
+        x > rect.left &&
+        x < rect.right &&
+        y > rect.top &&
+        y < rect.bottom
+    ) {
+        dragged.style.left = (x - rect.left) + 'px';
+        dragged.style.top = (y - rect.top) + 'px';
+        scene.appendChild(dragged);
+    } else {
+        dragged.remove();
+    }
+
+    dragged = null;
+});
+</script>
+
+</body>
+</html>
