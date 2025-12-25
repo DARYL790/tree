@@ -2,150 +2,204 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<title>🎄 圣诞树装饰小游戏</title>
+<title>🎄 Merry Christmas</title>
+
 <style>
-    body {
-        margin: 0;
-        background: linear-gradient(#0a1a2f, #123);
-        font-family: "Microsoft YaHei", sans-serif;
-        color: #fff;
-        text-align: center;
-        user-select: none;
-    }
+body {
+    margin: 0;
+    background: radial-gradient(circle at top, #0a1a2f, #050b15);
+    font-family: "Microsoft YaHei", sans-serif;
+    color: #fff;
+    text-align: center;
+    overflow-x: hidden;
+}
 
-    h1 {
-        margin: 20px 0 10px;
-    }
+/* 标题 */
+h1 {
+    margin: 18px 0 6px;
+    font-size: 26px;
+    color: gold;
+    text-shadow: 0 0 12px gold;
+}
 
-    #scene {
-        position: relative;
-        width: 360px;
-        height: 520px;
-        margin: 20px auto;
-        background: radial-gradient(circle at top, #1c3b2f, #0c1f17);
-        border-radius: 16px;
-        box-shadow: 0 0 20px rgba(0,0,0,0.5);
-        overflow: hidden;
-    }
+p { margin: 0 0 10px; }
 
-    /* 圣诞树 */
-    .tree {
-        position: absolute;
-        bottom: 60px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 0;
-        height: 0;
-        border-left: 140px solid transparent;
-        border-right: 140px solid transparent;
-        border-bottom: 260px solid #1fa055;
-    }
+/* 场景 */
+#scene {
+    position: relative;
+    width: 360px;
+    height: 560px;
+    margin: 20px auto;
+    background: linear-gradient(#102840, #08131f);
+    border-radius: 20px;
+    box-shadow: 0 0 40px rgba(0,0,0,0.6);
+    overflow: hidden;
+}
 
-    .tree::before {
-        content: "";
-        position: absolute;
-        top: 60px;
-        left: -110px;
-        width: 0;
-        height: 0;
-        border-left: 110px solid transparent;
-        border-right: 110px solid transparent;
-        border-bottom: 200px solid #23b463;
-    }
+/* 祝福 */
+.greeting {
+    position: absolute;
+    top: 14px;
+    width: 100%;
+    font-size: 20px;
+    color: gold;
+    text-shadow: 0 0 6px gold, 0 0 12px orange;
+    z-index: 10;
+}
 
-    .tree::after {
-        content: "";
-        position: absolute;
-        top: 120px;
-        left: -80px;
-        width: 0;
-        height: 0;
-        border-left: 80px solid transparent;
-        border-right: 80px solid transparent;
-        border-bottom: 150px solid #2ad173;
-    }
+/* 星星 */
+.star {
+    position: absolute;
+    top: 52px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 36px;
+    animation: pulse 1.5s infinite alternate;
+    z-index: 10;
+}
 
-    /* 树干 */
-    .trunk {
-        position: absolute;
-        bottom: 20px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 40px;
-        height: 40px;
-        background: #8b5a2b;
-        border-radius: 6px;
-    }
+@keyframes pulse {
+    from { transform: translateX(-50%) scale(1); opacity: .7; }
+    to   { transform: translateX(-50%) scale(1.25); opacity: 1; }
+}
 
-    /* 装饰品区域 */
-    #tools {
-        margin-top: 10px;
-    }
+/* 圣诞树（多层） */
+.tree-layer {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 8px;
+}
 
-    .ornament {
-        display: inline-block;
-        font-size: 28px;
-        margin: 8px;
-        cursor: grab;
-    }
+.layer1 {
+    bottom: 120px;
+    width: 260px;
+    height: 180px;
+    background: linear-gradient(#1b8f4a, #0f5f32);
+    clip-path: polygon(50% 0, 0 100%, 100% 100%);
+}
 
-    .placed {
-        position: absolute;
-        cursor: grab;
-    }
+.layer2 {
+    bottom: 200px;
+    width: 220px;
+    height: 150px;
+    background: linear-gradient(#22a85a, #15703d);
+    clip-path: polygon(50% 0, 0 100%, 100% 100%);
+}
 
-    footer {
-        font-size: 13px;
-        opacity: 0.7;
-        margin-top: 10px;
-    }
-    /* ❄️ 下雪动画 */
+.layer3 {
+    bottom: 260px;
+    width: 180px;
+    height: 120px;
+    background: linear-gradient(#2ccf70, #1b8f4a);
+    clip-path: polygon(50% 0, 0 100%, 100% 100%);
+}
+
+/* 树干 */
+.trunk {
+    position: absolute;
+    bottom: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(#8b5a2b, #5a3a1a);
+    border-radius: 6px;
+}
+
+/* 彩灯 */
+.light {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    animation: blink 1.2s infinite alternate;
+}
+
+@keyframes blink {
+    from { opacity: .3; }
+    to   { opacity: 1; }
+}
+
+/* 装饰工具 */
+#tools {
+    margin-top: 8px;
+}
+
+.ornament {
+    display: inline-block;
+    font-size: 28px;
+    margin: 6px;
+    cursor: grab;
+}
+
+.placed {
+    position: absolute;
+    cursor: grab;
+    z-index: 20;
+}
+
+/* 雪花 */
 .snowflake {
     position: fixed;
     top: -10px;
     color: white;
-    font-size: 14px;
     pointer-events: none;
-    z-index: 999;
-    opacity: 0.8;
-    animation-name: fall;
-    animation-timing-function: linear;
+    z-index: 1000;
+    animation: fall linear;
 }
 
 @keyframes fall {
-    to {
-        transform: translateY(110vh);
-    }
+    to { transform: translateY(110vh); }
+}
+
+footer {
+    font-size: 12px;
+    opacity: .7;
+    margin: 6px 0 10px;
 }
 </style>
 </head>
 
 <body>
 
-<h1>🎄 给你的一棵圣诞树</h1>
+<h1>🎄 Merry Christmas</h1>
 <p>把装饰品拖到树上吧 ✨</p>
 
 <div id="scene">
-    <div class="tree"></div>
+    <div class="greeting">Merry Christmas, XXX</div>
+    <div class="star">⭐</div>
+
+    <div class="tree-layer layer3"></div>
+    <div class="tree-layer layer2"></div>
+    <div class="tree-layer layer1"></div>
+
     <div class="trunk"></div>
 </div>
 
 <div id="tools">
-    <span class="ornament">⭐</span>
     <span class="ornament">🎁</span>
     <span class="ornament">🔔</span>
     <span class="ornament">🍬</span>
     <span class="ornament">🎀</span>
+    <span class="ornament">❄️</span>
 </div>
 
-<footer>
-    圣诞快乐 🎅 | 拖拽装饰属于你的树
-</footer>
+<footer>🎶 点击页面播放音乐 · ❄️ 下雪中</footer>
+
+<audio id="bgm" loop>
+    <source src="https://cdn.pixabay.com/audio/2022/12/21/audio_4a6f79d8b2.mp3">
+</audio>
 
 <script>
-let dragged = null;
+/* 🎶 音乐 */
+const bgm = document.getElementById("bgm");
+window.addEventListener("click", () => {
+    if (bgm.paused) bgm.play();
+});
 
-// 从工具栏拖出
+/* 🎁 拖拽 */
+let dragged = null;
 document.querySelectorAll('.ornament').forEach(item => {
     item.addEventListener('mousedown', e => {
         dragged = item.cloneNode(true);
@@ -156,7 +210,6 @@ document.querySelectorAll('.ornament').forEach(item => {
     });
 });
 
-// 拖动
 document.addEventListener('mousemove', e => {
     if (dragged) {
         dragged.style.left = e.pageX - 14 + 'px';
@@ -164,49 +217,45 @@ document.addEventListener('mousemove', e => {
     }
 });
 
-// 放下
 document.addEventListener('mouseup', () => {
     if (!dragged) return;
-
     const scene = document.getElementById('scene');
-    const rect = scene.getBoundingClientRect();
+    const r = scene.getBoundingClientRect();
     const x = parseInt(dragged.style.left);
     const y = parseInt(dragged.style.top);
 
-    if (
-        x > rect.left &&
-        x < rect.right &&
-        y > rect.top &&
-        y < rect.bottom
-    ) {
-        dragged.style.left = (x - rect.left) + 'px';
-        dragged.style.top = (y - rect.top) + 'px';
+    if (x > r.left && x < r.right && y > r.top && y < r.bottom) {
+        dragged.style.left = (x - r.left) + 'px';
+        dragged.style.top = (y - r.top) + 'px';
         scene.appendChild(dragged);
-    } else {
-        dragged.remove();
-    }
+    } else dragged.remove();
 
     dragged = null;
 });
-    /* ❄️ 下雪效果 */
-function createSnowflake() {
-    const snow = document.createElement("div");
-    snow.className = "snowflake";
-    snow.innerText = "❄";
 
-    snow.style.left = Math.random() * window.innerWidth + "px";
-    snow.style.fontSize = (Math.random() * 10 + 10) + "px";
-    snow.style.animationDuration = (Math.random() * 5 + 5) + "s";
-    snow.style.opacity = Math.random();
-
-    document.body.appendChild(snow);
-
-    setTimeout(() => {
-        snow.remove();
-    }, 10000);
+/* ❄️ 下雪 */
+function snow() {
+    const s = document.createElement("div");
+    s.className = "snowflake";
+    s.innerText = "❄";
+    s.style.left = Math.random() * window.innerWidth + "px";
+    s.style.fontSize = (Math.random() * 12 + 10) + "px";
+    s.style.animationDuration = (Math.random() * 5 + 5) + "s";
+    document.body.appendChild(s);
+    setTimeout(() => s.remove(), 10000);
 }
+setInterval(snow, 250);
 
-setInterval(createSnowflake, 300);
+/* ✨ 彩灯 */
+for (let i = 0; i < 18; i++) {
+    const l = document.createElement("div");
+    l.className = "light";
+    l.style.background = ["red","yellow","cyan","pink"][i % 4];
+    l.style.left = (120 + Math.random()*120) + "px";
+    l.style.top  = (180 + Math.random()*160) + "px";
+    l.style.animationDelay = Math.random() + "s";
+    document.getElementById("scene").appendChild(l);
+}
 </script>
 
 </body>
