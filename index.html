@@ -2,10 +2,10 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>🎄 Merry Christmas</title>
-
 <style>
-body{
+body {
     margin:0;
     background:radial-gradient(circle at top,#0a1a2f,#050b15);
     font-family:"Microsoft YaHei",sans-serif;
@@ -14,19 +14,23 @@ body{
     overflow-x:hidden;
 }
 
-h1{
+h1 {
     margin:18px 0 6px;
     font-size:28px;
     color:gold;
     text-shadow:0 0 12px gold;
 }
-p{margin:0 0 10px;opacity:.9}
+p {
+    margin:0 0 10px;
+    opacity:.9;
+}
 
 /* 场景 */
-#scene{
+#scene {
     position:relative;
-    width:360px;
-    height:600px;
+    width:90%;
+    max-width:360px;
+    aspect-ratio:3/5;
     margin:20px auto;
     background:linear-gradient(#102840,#08131f);
     border-radius:22px;
@@ -35,7 +39,7 @@ p{margin:0 0 10px;opacity:.9}
 }
 
 /* 祝福 */
-.greeting{
+.greeting {
     position:absolute;
     top:16px;
     width:100%;
@@ -45,34 +49,34 @@ p{margin:0 0 10px;opacity:.9}
     z-index:10;
 }
 
-/* ===== 树整体锚点 ===== */
-.tree-wrapper{
+/* 树整体锚点 */
+.tree-wrapper {
     position:absolute;
-    bottom:110px;
+    bottom:15%;
     left:50%;
     transform:translateX(-50%);
-    width:260px;
-    height:380px;
+    width:70%;
+    height:auto;
 }
 
 /* 星星：严格对齐树中心 */
-.star{
+.star {
     position:absolute;
-    top:-30px;
+    top:0;
     left:50%;
-    transform:translateX(-50%);
+    transform:translate(-50%,-50%);
     font-size:38px;
     filter:drop-shadow(0 0 14px gold);
     animation:starPulse 1.6s infinite alternate;
     z-index:5;
 }
-@keyframes starPulse{
-    from{transform:translateX(-50%) scale(1);opacity:.8}
-    to{transform:translateX(-50%) scale(1.25);opacity:1}
+@keyframes starPulse {
+    from {transform:translate(-50%,-50%) scale(1);opacity:.8}
+    to {transform:translate(-50%,-50%) scale(1.25);opacity:1}
 }
 
 /* 树层 */
-.tree-layer{
+.tree-layer {
     position:absolute;
     left:50%;
     transform:translateX(-50%);
@@ -83,68 +87,70 @@ p{margin:0 0 10px;opacity:.9}
         0 6px 10px rgba(0,0,0,.25);
 }
 
-.layer-top{
-    top:28px;
-    width:140px;
-    height:120px;
+.layer-top {
+    top:10%;
+    width:50%;
+    height:30%;
     background:radial-gradient(circle at top,#46f59c,#1e8f4e);
 }
-.layer-mid{
-    top:110px;
-    width:200px;
-    height:160px;
+.layer-mid {
+    top:25%;
+    width:70%;
+    height:40%;
     background:radial-gradient(circle at top,#35d481,#18753f);
 }
-.layer-bottom{
-    top:220px;
-    width:260px;
-    height:190px;
+.layer-bottom {
+    top:45%;
+    width:100%;
+    height:45%;
     background:radial-gradient(circle at top,#2fb86a,#135e33);
 }
 
 /* 树干 */
-.trunk{
+.trunk {
     position:absolute;
-    bottom:-42px;
+    bottom:-10%;
     left:50%;
     transform:translateX(-50%);
-    width:44px;
-    height:44px;
+    width:16%;
+    height:12%;
     background:linear-gradient(#8b5a2b,#5a3a1a);
     border-radius:6px;
     box-shadow:0 4px 8px rgba(0,0,0,.4);
 }
 
 /* 灯 */
-.light{
+.light {
     position:absolute;
-    width:8px;
-    height:8px;
+    width:4%;
+    aspect-ratio:1/1;
     border-radius:50%;
     box-shadow:0 0 10px currentColor;
     animation:blink 1.3s infinite alternate;
 }
-@keyframes blink{
+@keyframes blink {
     from{opacity:.35}
     to{opacity:1}
 }
 
 /* 装饰工具 */
-#tools{margin-top:8px}
-.ornament{
+#tools {
+    margin-top:8px;
+}
+.ornament {
     display:inline-block;
     font-size:28px;
     margin:6px;
     cursor:grab;
 }
-.placed{
+.placed {
     position:absolute;
     cursor:grab;
     z-index:20;
 }
 
 /* 雪花 */
-.snowflake{
+.snowflake {
     position:fixed;
     top:-10px;
     color:white;
@@ -152,11 +158,11 @@ p{margin:0 0 10px;opacity:.9}
     z-index:1000;
     animation:fall linear;
 }
-@keyframes fall{
-    to{transform:translateY(110vh)}
+@keyframes fall {
+    to {transform:translateY(110vh)}
 }
 
-footer{
+footer {
     font-size:12px;
     opacity:.7;
     margin:6px 0 10px;
@@ -171,14 +177,11 @@ footer{
 
 <div id="scene">
     <div class="greeting">Merry Christmas！</div>
-
     <div class="tree-wrapper">
         <div class="star">⭐</div>
-
         <div class="tree-layer layer-top"></div>
         <div class="tree-layer layer-mid"></div>
         <div class="tree-layer layer-bottom"></div>
-
         <div class="trunk"></div>
     </div>
 </div>
@@ -193,7 +196,6 @@ footer{
 
 <footer>🎶 点击页面播放音乐 · ❄️ 下雪中</footer>
 
-<!-- 🎶 本地音乐（你自己上传） -->
 <audio id="bgm" loop>
     <source src="music.mp3" type="audio/mpeg">
 </audio>
@@ -205,24 +207,26 @@ window.addEventListener("click",()=>{
     if(bgm.paused) bgm.play();
 });
 
-/* 🎁 拖拽装饰 */
+/* 🎁 拖拽装饰（鼠标+触控） */
 let dragged=null;
-document.querySelectorAll('.ornament').forEach(item=>{
-    item.addEventListener('mousedown',e=>{
-        dragged=item.cloneNode(true);
-        dragged.classList.add('placed');
-        dragged.style.left=e.pageX-14+'px';
-        dragged.style.top=e.pageY-14+'px';
-        document.body.appendChild(dragged);
-    });
-});
-document.addEventListener('mousemove',e=>{
-    if(dragged){
-        dragged.style.left=e.pageX-14+'px';
-        dragged.style.top=e.pageY-14+'px';
-    }
-});
-document.addEventListener('mouseup',()=>{
+
+function startDrag(e){
+    e.preventDefault();
+    dragged=this.cloneNode(true);
+    dragged.classList.add('placed');
+    document.body.appendChild(dragged);
+    moveDrag(e);
+}
+
+function moveDrag(e){
+    if(!dragged) return;
+    let pageX = e.touches ? e.touches[0].pageX : e.pageX;
+    let pageY = e.touches ? e.touches[0].pageY : e.pageY;
+    dragged.style.left = pageX - dragged.offsetWidth/2 + 'px';
+    dragged.style.top = pageY - dragged.offsetHeight/2 + 'px';
+}
+
+function endDrag(e){
     if(!dragged) return;
     const scene=document.getElementById('scene');
     const r=scene.getBoundingClientRect();
@@ -232,9 +236,20 @@ document.addEventListener('mouseup',()=>{
         dragged.style.left=(x-r.left)+'px';
         dragged.style.top=(y-r.top)+'px';
         scene.appendChild(dragged);
-    }else dragged.remove();
+    } else dragged.remove();
     dragged=null;
+}
+
+document.querySelectorAll('.ornament').forEach(item=>{
+    item.addEventListener('mousedown', startDrag);
+    item.addEventListener('touchstart', startDrag);
 });
+
+document.addEventListener('mousemove', moveDrag);
+document.addEventListener('touchmove', moveDrag);
+
+document.addEventListener('mouseup', endDrag);
+document.addEventListener('touchend', endDrag);
 
 /* ❄️ 下雪 */
 function snow(){
@@ -252,10 +267,11 @@ setInterval(snow,260);
 /* 💡 螺旋灯带 */
 const tree=document.querySelector(".tree-wrapper");
 function lightBand(y1,y2,amp,count){
+    const treeWidth = tree.offsetWidth;
     for(let i=0;i<count;i++){
         const t=i/count;
         const y=y1+t*(y2-y1);
-        const x=130+Math.sin(t*Math.PI*4)*amp;
+        const x=treeWidth/2 + Math.sin(t*Math.PI*4)*amp;
         const l=document.createElement("div");
         l.className="light";
         l.style.left=x+"px";
@@ -265,9 +281,10 @@ function lightBand(y1,y2,amp,count){
         tree.appendChild(l);
     }
 }
-lightBand(60,140,28,12);
-lightBand(140,260,45,18);
-lightBand(260,360,60,22);
+lightBand(60,140,tree.offsetWidth*0.2,12);
+lightBand(140,260,tree.offsetWidth*0.25,18);
+lightBand(260,360,tree.offsetWidth*0.3,22);
+
 </script>
 
 </body>
