@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>🎄 Merry Christmas</title>
 <style>
 body {
@@ -13,23 +13,15 @@ body {
     text-align:center;
     overflow-x:hidden;
 }
-h1 {
-    margin:18px 0 6px;
-    font-size:28px;
-    color:gold;
-    text-shadow:0 0 12px gold;
-}
-p {
-    margin:0 0 10px;
-    opacity:.9;
-}
+h1 {margin:18px 0 6px; font-size:28px; color:gold; text-shadow:0 0 12px gold;}
+p {margin:0 0 10px; opacity:.9;}
 
-/* 场景 */
+/* 场景容器 */
 #scene {
     position:relative;
     width:90%;
     max-width:360px;
-    aspect-ratio:3/5;
+    height:600px; /* 固定高度，保证树显示 */
     margin:20px auto;
     background:linear-gradient(#102840,#08131f);
     border-radius:22px;
@@ -37,7 +29,7 @@ p {
     overflow:hidden;
 }
 
-/* 祝福 */
+/* 祝福文字 */
 .greeting {
     position:absolute;
     top:16px;
@@ -48,21 +40,20 @@ p {
     z-index:10;
 }
 
-/* 树整体 */
+/* 树 */
 .tree-wrapper {
     position:absolute;
-    bottom:0;  /* 紧贴场景底部 */
+    bottom:0;
     left:50%;
     transform:translateX(-50%);
     width:70%;
-    max-width:260px;
-    height:auto;
+    height:90%; /* 树高度占场景90% */
 }
 
 /* 星星 */
 .star {
     position:absolute;
-    top:0;
+    top:0%;
     left:50%;
     transform:translate(-50%,-50%);
     font-size:38px;
@@ -70,10 +61,7 @@ p {
     animation:starPulse 1.6s infinite alternate;
     z-index:5;
 }
-@keyframes starPulse {
-    from {transform:translate(-50%,-50%) scale(1);opacity:.8}
-    to {transform:translate(-50%,-50%) scale(1.25);opacity:1}
-}
+@keyframes starPulse {from{transform:translate(-50%,-50%) scale(1);opacity:.8} to{transform:translate(-50%,-50%) scale(1.25);opacity:1}}
 
 /* 树层 */
 .tree-layer {
@@ -84,8 +72,8 @@ p {
     border-radius:12px;
     box-shadow: inset 0 -14px 22px rgba(0,0,0,.28),0 6px 10px rgba(0,0,0,.25);
 }
-.layer-top {top:10%; width:50%; height:30%; background:radial-gradient(circle at top,#46f59c,#1e8f4e);}
-.layer-mid {top:25%; width:70%; height:40%; background:radial-gradient(circle at top,#35d481,#18753f);}
+.layer-top {top:5%; width:50%; height:25%; background:radial-gradient(circle at top,#46f59c,#1e8f4e);}
+.layer-mid {top:20%; width:70%; height:35%; background:radial-gradient(circle at top,#35d481,#18753f);}
 .layer-bottom {top:45%; width:100%; height:45%; background:radial-gradient(circle at top,#2fb86a,#135e33);}
 
 /* 树干 */
@@ -221,6 +209,7 @@ setInterval(snow,260);
 const tree=document.querySelector(".tree-wrapper");
 function lightBand(y1,y2,amp,count){
     const treeWidth = tree.offsetWidth;
+    const treeHeight = tree.offsetHeight;
     for(let i=0;i<count;i++){
         const t=i/count;
         const y=y1+t*(y2-y1);
@@ -234,9 +223,9 @@ function lightBand(y1,y2,amp,count){
         tree.appendChild(l);
     }
 }
-lightBand(60,140,tree.offsetWidth*0.2,12);
-lightBand(140,260,tree.offsetWidth*0.25,18);
-lightBand(260,360,tree.offsetWidth*0.3,22);
+lightBand(60,140,60,12);
+lightBand(140,260,80,18);
+lightBand(260,360,100,22);
 </script>
 </body>
 </html>
