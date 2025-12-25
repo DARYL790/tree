@@ -13,7 +13,6 @@ body {
     text-align:center;
     overflow-x:hidden;
 }
-
 h1 {
     margin:18px 0 6px;
     font-size:28px;
@@ -49,19 +48,18 @@ p {
     z-index:10;
 }
 
-/* 树整体锚点 */
+/* 树整体 */
 .tree-wrapper {
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 70%;
-    max-width: 260px; /* 最大宽度防止过大 */
-    height: auto;
+    position:absolute;
+    bottom:0;  /* 紧贴场景底部 */
+    left:50%;
+    transform:translateX(-50%);
+    width:70%;
+    max-width:260px;
+    height:auto;
 }
 
-
-/* 星星：严格对齐树中心 */
+/* 星星 */
 .star {
     position:absolute;
     top:0;
@@ -84,34 +82,16 @@ p {
     transform:translateX(-50%);
     clip-path:polygon(50% 0,0 100%,100% 100%);
     border-radius:12px;
-    box-shadow:
-        inset 0 -14px 22px rgba(0,0,0,.28),
-        0 6px 10px rgba(0,0,0,.25);
+    box-shadow: inset 0 -14px 22px rgba(0,0,0,.28),0 6px 10px rgba(0,0,0,.25);
 }
-
-.layer-top {
-    top:10%;
-    width:50%;
-    height:30%;
-    background:radial-gradient(circle at top,#46f59c,#1e8f4e);
-}
-.layer-mid {
-    top:25%;
-    width:70%;
-    height:40%;
-    background:radial-gradient(circle at top,#35d481,#18753f);
-}
-.layer-bottom {
-    top:45%;
-    width:100%;
-    height:45%;
-    background:radial-gradient(circle at top,#2fb86a,#135e33);
-}
+.layer-top {top:10%; width:50%; height:30%; background:radial-gradient(circle at top,#46f59c,#1e8f4e);}
+.layer-mid {top:25%; width:70%; height:40%; background:radial-gradient(circle at top,#35d481,#18753f);}
+.layer-bottom {top:45%; width:100%; height:45%; background:radial-gradient(circle at top,#2fb86a,#135e33);}
 
 /* 树干 */
 .trunk {
     position:absolute;
-    bottom:-10%;
+    bottom:0;
     left:50%;
     transform:translateX(-50%);
     width:16%;
@@ -130,26 +110,12 @@ p {
     box-shadow:0 0 10px currentColor;
     animation:blink 1.3s infinite alternate;
 }
-@keyframes blink {
-    from{opacity:.35}
-    to{opacity:1}
-}
+@keyframes blink {from{opacity:.35} to{opacity:1}}
 
 /* 装饰工具 */
-#tools {
-    margin-top:8px;
-}
-.ornament {
-    display:inline-block;
-    font-size:28px;
-    margin:6px;
-    cursor:grab;
-}
-.placed {
-    position:absolute;
-    cursor:grab;
-    z-index:20;
-}
+#tools {margin-top:8px;}
+.ornament {display:inline-block; font-size:28px; margin:6px; cursor:grab;}
+.placed {position:absolute; cursor:grab; z-index:20;}
 
 /* 雪花 */
 .snowflake {
@@ -160,18 +126,11 @@ p {
     z-index:1000;
     animation:fall linear;
 }
-@keyframes fall {
-    to {transform:translateY(110vh)}
-}
+@keyframes fall {to {transform:translateY(110vh)}}
 
-footer {
-    font-size:12px;
-    opacity:.7;
-    margin:6px 0 10px;
-}
+footer {font-size:12px; opacity:.7; margin:6px 0 10px;}
 </style>
 </head>
-
 <body>
 
 <h1>🎄 Merry Christmas</h1>
@@ -203,15 +162,12 @@ footer {
 </audio>
 
 <script>
-/* 🎶 音乐播放 */
+/* 音乐播放 */
 const bgm=document.getElementById("bgm");
-window.addEventListener("click",()=>{
-    if(bgm.paused) bgm.play();
-});
+window.addEventListener("click",()=>{if(bgm.paused) bgm.play();});
 
-/* 🎁 拖拽装饰（鼠标+触控） */
+/* 拖拽/触控 */
 let dragged=null;
-
 function startDrag(e){
     e.preventDefault();
     dragged=this.cloneNode(true);
@@ -219,7 +175,6 @@ function startDrag(e){
     document.body.appendChild(dragged);
     moveDrag(e);
 }
-
 function moveDrag(e){
     if(!dragged) return;
     let pageX = e.touches ? e.touches[0].pageX : e.pageX;
@@ -227,7 +182,6 @@ function moveDrag(e){
     dragged.style.left = pageX - dragged.offsetWidth/2 + 'px';
     dragged.style.top = pageY - dragged.offsetHeight/2 + 'px';
 }
-
 function endDrag(e){
     if(!dragged) return;
     const scene=document.getElementById('scene');
@@ -241,19 +195,16 @@ function endDrag(e){
     } else dragged.remove();
     dragged=null;
 }
-
 document.querySelectorAll('.ornament').forEach(item=>{
     item.addEventListener('mousedown', startDrag);
     item.addEventListener('touchstart', startDrag);
 });
-
 document.addEventListener('mousemove', moveDrag);
 document.addEventListener('touchmove', moveDrag);
-
 document.addEventListener('mouseup', endDrag);
 document.addEventListener('touchend', endDrag);
 
-/* ❄️ 下雪 */
+/* 下雪 */
 function snow(){
     const s=document.createElement("div");
     s.className="snowflake";
@@ -266,7 +217,7 @@ function snow(){
 }
 setInterval(snow,260);
 
-/* 💡 螺旋灯带 */
+/* 螺旋彩灯 */
 const tree=document.querySelector(".tree-wrapper");
 function lightBand(y1,y2,amp,count){
     const treeWidth = tree.offsetWidth;
@@ -286,8 +237,6 @@ function lightBand(y1,y2,amp,count){
 lightBand(60,140,tree.offsetWidth*0.2,12);
 lightBand(140,260,tree.offsetWidth*0.25,18);
 lightBand(260,360,tree.offsetWidth*0.3,22);
-
 </script>
-
 </body>
 </html>
