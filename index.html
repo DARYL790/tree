@@ -51,13 +51,15 @@ p {
 
 /* 树整体锚点 */
 .tree-wrapper {
-    position:absolute;
-    bottom:15%;
-    left:50%;
-    transform:translateX(-50%);
-    width:70%;
-    height:auto;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 70%;
+    max-width: 260px; /* 最大宽度防止过大 */
+    height: auto;
 }
+
 
 /* 星星：严格对齐树中心 */
 .star {
